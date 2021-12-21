@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
+<body>
+    <h1>Corona Statistics</h1>
+    <h2>Select your countries</h2>
+    <form method="post" action="/">
+        <select name="country1" id="country1">
+            <option value="MAR" selected >Morocco</option>
+            <option value="FRA">France</option>
+            <option value="USA">USA</option>
+            <option value="ITA">ITALY</option>
+        </select>
+        <select name="country2" id="country2">
+            <option value="MAR" >Morocco</option>
+            <option value="FRA" selected>France</option>
+            <option value="USA">USA</option>
+            <option value="ITA">ITALY</option>
+        </select>
+        <select name="country3" id="country3">
+            <option value="MAR" >Morocco</option>
+            <option value="FRA">France</option>
+            <option value="USA">USA</option>
+            <option value="ITA" selected>ITALY</option>
+        </select>
+      <input type="submit" value="ok"/>
+    </form>
+    <div style="position: relative; height: 40vh ;width: 80vw;">
+        <h2>Corona Cases</h2>
+        <canvas id="myChart1" width="400" height="400"></canvas>
+        <h2>Corona Deaths </h2>
+        <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        var dateLabels = {{dateLabels|safe}}
+        var casesCountry1 = {{casesCountry1|safe}}
+        var casesCountry2 = {{casesCountry2|safe}}
+        var casesCountry3 = {{casesCountry3|safe}}
+
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var myChart1 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dateLabels,
+                datasets: [{
+                    label: '{{country1}}',
+                    data: casesCountry1,
+                    borderColor:'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: '{{country2}}',
+                    data: casesCountry2,
+                    borderColor:'rgb(99, 255, 132)',
+                    fill: false
+                },
+                {
+                    label: '{{country3}}',
+                    data: casesCountry3,
+                    borderColor:'rgb(99,132,255)',
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+        </script>
+        <script>
+        var dateLabels = {{dateLabels|safe}}
+        var deathsCountry1 = {{deathsCountry1|safe}}
+        var deathsCountry2 = {{deathsCountry2|safe}}
+        var deathsCountry3 = {{deathsCountry3|safe}}
+
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dateLabels,
+                datasets: [{
+                    label: '{{country1}}',
+                    data: deathsCountry1,
+                    borderColor:'rgb(255, 99, 132)',
+                    fill: false
+                },
+                {
+                    label: '{{country2}}',
+                    data: deathsCountry2,
+                    borderColor:'rgb(99, 255, 132)',
+                    fill: false
+                },
+                {
+                    label: '{{country3}}',
+                    data: deathsCountry3,
+                    borderColor:'rgb(99,132,255)',
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+        </script>
+
+</body>
+
+
+</html>
